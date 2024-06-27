@@ -1,3 +1,19 @@
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+[project]
+name="queenbeethreading"
+version="1.0"
+authors=[
+{author="puzzle00", email="none"}
+]
+description="The Queen Bee Threading Framework, a framework that streamlines threading in Python"
+readme="README.MD"
+requires-python=">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: Freeware",
+    "Operating System :: OS Independent",
+]
+[project.urls]
+Github="https://github.com/puzzle00/queenbeethreading"
