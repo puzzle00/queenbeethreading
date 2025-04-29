@@ -12,27 +12,27 @@
 
 ## 2 DOCUMENTATION
 > ### 2.1 Overview
-> > #### 2.1.1 Queen Bees {#qb-overview}
-> > > Queen Bees (**`class QueenBee()`**) handle the creation of [Worker Bees](#wb-overview) and the storing of [Drones](#db-overview) (templates for workers.) You generally need one Queen Bee per app. To use a Queen Bee, create one (` q=QueenBee()` ) and call `q.makeBee(d.mate())` where `"d"` is a Drone Bee. 
-> > #### 2.1.2 Drone Bees {#db-overview}
+> > #### 2.1.1 Queen Bees
+> > > Queen Bees (**`class QueenBee()`**) handle the creation of Worker Bees and the storing of Drones (templates for workers.) You generally need one Queen Bee per app. To use a Queen Bee, create one (` q=QueenBee()` ) and call `q.makeBee(d.mate())` where `"d"` is a Drone Bee. 
+> > #### 2.1.2 Drone Bees
 > > > Drone Bees (**`class DroneBee(func,**inf)`**) serve as templates to create Worker Bees. Their constructor is passed a callback to a function (func) and metadata, for example a label for the worker bee type it's representing. You usually have several drones per application. 
-> > ####  2.1.3 Workers {#wb-overview}
-> > > Worker Bees ( __`class WorkerBee()`__ ) handle the actual work defined by the [Drone Bees](#db-overview) they are linked to. They can be dispatched by a [Queen](#qb-overview)'s `begin()` method or [(advanced)](#qo) Queenless Operation.
+> > ####  2.1.3 Workers 
+> > > Worker Bees ( __`class WorkerBee()`__ ) handle the actual work defined by the [Drone Bees](#db-overview) they are linked to. They can be dispatched by a Queen's `begin()` method or (advanced) Queenless Operation.
 > ### 2.2 In Detail
-> > #### 2.2.1 Queen Bees {#qb}
+> > #### 2.2.1 Queen Bees
 > > >  create()
 > > > : Creates Workers. *DO NOT CALL YOURSELF UNLESS USING [QUEENLESS OP (ADVANCED)](#qo)*
 > > > 
 > > > makeBee(DroneBee d)
-> > > : Stores a [Drone](#db) in the drone repo.
+> > > : Stores a Drone in the drone repo.
 > > >
 > > >begin(label=None)
-> > > : Starts the [Worker Bees](#wb).
+> > > : Starts the Worker Bees.
 > > >If `label` param included: starts all the workers with label `label`.
 > > >
 > > >uptask(label,cap)
 > > > : Tasks `cap` bees with drone (identified by label) `label`
-> > #### 2.2.2 Drone Bees {#db}
+> > #### 2.2.2 Drone Bees
 > > > \_\_init\_\_(func,allmd=None,**inf)
 > > > : Initializes the drone with task `func` and info (including label) `inf`. If you want to pass a dict as metadata, use allmd.
 > > > 
@@ -47,27 +47,27 @@
 > > > retask(func)
 > > > : Gives the drone a new task to use.
 > > > *__Some info__: This is why you always use mate().*
-> > #### 2.2.3 Worker Bees {#wb}
+> > #### 2.2.3 Worker Bees
 > > > go()
-> > > : *DO NOT CALL YOURSELF UNLESS USING [QUEENLESS OP (ADVANCED)](#qo)*
+> > > : *DO NOT CALL YOURSELF UNLESS USING QUEENLESS OP (ADVANCED)*
 > > > *Do not call yourself. Auto-called by the Queen class.*
 > > > Starts this Worker.
 > > >
 > > > apply(DroneBee d)
-> > > : *DO NOT CALL YOURSELF UNLESS USING [QUEENLESS OP (ADVANCED)](#qo)*
+> > > : *DO NOT CALL YOURSELF UNLESS USING QUEENLESS OP (ADVANCED)*
 > > > *Do not call yourself. Auto-called by the Queen class.*
 > > > Set this worker to a certain [Drone](#db) type.
 > > #### 2.2.4 Other Classes
 > > > BeeBuffer
 > > > : BeeBuffer is the class that queues the bees while waiting for a turn to run.
-> ### 2.3 Queenless Op (Advanced) {#qo}
+> ### 2.3 Queenless Op (Advanced)
 > *__note__: this is an __advanced topic__. Recommended for experienced people only.*
 > > #### 2.3.1 Overview
-> > > **Queenless Op is a way you can exert finer control over your [Worker Bees](#wb) by controlling the bees without a queen.**
+> > > **Queenless Op is a way you can exert finer control over your Worker Bees by controlling the bees without a queen.**
 > > > *__note__: you still need a queen, the queen just isn't controlling your bees.*
 > > #### 2.3.2 In Detail
 > > > Making Bees
-> > > : Instead of letting the queen make worker bees, you create them yourself by using the [Queen](#qb)'s `create()` method. This will create a blank bee, that you then *infuse* with a drone using the [worker](wb)'s `apply()` method, like this:
+> > > : Instead of letting the queen make worker bees, you create them yourself by using the Queen's `create()` method. This will create a blank bee, that you then *infuse* with a drone using the worker's `apply()` method, like this:
 ```python
 q=QueenBee()
 def myFunc():
@@ -80,11 +80,11 @@ emptyBee.go()
 > > > 
 > > > Go'ing Bees
 > > > : To go (start) a bee, call its `go()` method.
-> > > Usually, this method is called by the [Queen](#qb)'s `begin()` method, but in QO, it is called by the user.
+> > > Usually, this method is called by the Queen's `begin()` method, but in QO, it is called by the user.
 > >
 > >
 >  ### 2.4 Examples {#ex}
->  [show basic Bee Hello World, two-bees, 3-bees]: #
+>
 > > #### 2.4.1 Bee Hello 
 > > >A simple example of using queenbee to say hello world. (not something you would usually use qb for)
 ```python
