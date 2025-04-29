@@ -56,7 +56,7 @@
 > > > apply(DroneBee d)
 > > > : *DO NOT CALL YOURSELF UNLESS USING QUEENLESS OP (ADVANCED)*
 > > > *Do not call yourself. Auto-called by the Queen class.*
-> > > Set this worker to a certain [Drone](#db) type.
+> > > Set this worker to a certain Drone#db type.
 > > #### 2.2.4 Other Classes
 > > > BeeBuffer
 > > > : BeeBuffer is the class that queues the bees while waiting for a turn to run.
@@ -83,7 +83,7 @@ emptyBee.go()
 > > > Usually, this method is called by the Queen's `begin()` method, but in QO, it is called by the user.
 > >
 > >
->  ### 2.4 Examples {#ex}
+>  ### 2.4 Examples
 >
 > > #### 2.4.1 Bee Hello 
 > > >A simple example of using queenbee to say hello world. (not something you would usually use qb for)
