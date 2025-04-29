@@ -21,7 +21,7 @@
 > ### 2.2 In Detail
 > > #### 2.2.1 Queen Bees
 > > >  create()
-> > > : Creates Workers. *DO NOT CALL YOURSELF UNLESS USING [QUEENLESS OP (ADVANCED)](#qo)*
+> > > : Creates Workers. *DO NOT CALL YOURSELF UNLESS USING QUEENLESS OP (ADVANCED)*
 > > > 
 > > > makeBee(DroneBee d)
 > > > : Stores a Drone in the drone repo.
@@ -56,7 +56,7 @@
 > > > apply(DroneBee d)
 > > > : *DO NOT CALL YOURSELF UNLESS USING QUEENLESS OP (ADVANCED)*
 > > > *Do not call yourself. Auto-called by the Queen class.*
-> > > Set this worker to a certain Drone#db type.
+> > > Set this worker to a certain Drone type.
 > > #### 2.2.4 Other Classes
 > > > BeeBuffer
 > > > : BeeBuffer is the class that queues the bees while waiting for a turn to run.
@@ -73,7 +73,7 @@ q=QueenBee()
 def myFunc():
     print("Hello World!")
 d=DroneBee(myFunc,label="Hello World",tag='test')
-emptyBee=QueenBee._create()
+emptyBee=QueenBee.create()
 emptyBee.apply(d)
 emptyBee.go()
 ```
