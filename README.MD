@@ -1,7 +1,7 @@
 [![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](https://python.org)
 
 [Install](https://pypi.org/project/queenbeethreading/1.0/)
-:up: Doesn't work.
+:up-arrow: Doesn't work.
 
 Install from here :octocat:
 # QUEENBEE THREADING PLATFORM
