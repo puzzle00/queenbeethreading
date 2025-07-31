@@ -2,6 +2,7 @@
 
 [Install](https://pypi.org/project/queenbeethreading/1.0/)
 :up: Doesn't work.
+
 Install from here :octocat:
 # QUEENBEE THREADING PLATFORM
 ## 1 README
