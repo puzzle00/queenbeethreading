@@ -14,7 +14,7 @@ commit:message.txt
 	git pull
 
 lint:
-	python3 -m black src/queenbeethreading/*
+	python3 -m black src/queenbeethreading/*.py
 
 test-upload:
 	rm -rf dist
