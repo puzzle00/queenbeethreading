@@ -56,7 +56,7 @@ class WorkerBee:
         self.task = d.prop
 
     def go(self):
-        threading.Thread(target=self.task).run()
+        threading.Thread(target=self.task).start()
 
 
 class QueenBee:
