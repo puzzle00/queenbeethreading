@@ -3,7 +3,7 @@ requires = ["setuptools >= 77.0.3"]
 build-backend = "setuptools.build_meta"
 [project]
 name = "queenbeethreading"
-version = "1.0"
+version = "2.0"
 authors = [
   { name="puzzle00", email="email@example.com" },
 ]
@@ -14,7 +14,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
 ]
-license = "MIT"
+license = "LGPL-3.0-or-later"
 license-files = ["LICENSE"]
 
 [project.urls]
