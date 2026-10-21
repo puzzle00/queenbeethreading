@@ -120,7 +120,7 @@ q.makeBee(d.mate())
 q.uptask("HelloMyBeesHello",1)
 q.begin()
 #or: q.begin("HelloMyBeesHello")
-
+q.block_until_done()
 ###############
 #Output:      #
 # Hello World #
@@ -143,6 +143,7 @@ q.makeBee(sb.mate())
 q.uptask('1',1)
 q.uptask('2',1)
 q.begin()
+q.block_until_done()
 ##############
 #Output:     #
 # 12 or 21   #
@@ -168,6 +169,8 @@ q.uptask('3',1)
 q.makeBee(d1.mate())
 q.makeBee(d2.mate())
 q.makeBee(d3.mate())
+q.begin()
+q.block_until_done()
 ###################################
 #Output:                          #
 # 123, 132, 213, 231, 312, or 321 #
