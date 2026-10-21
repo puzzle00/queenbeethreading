@@ -3,7 +3,7 @@ requires = ["setuptools >= 77.0.3"]
 build-backend = "setuptools.build_meta"
 [project]
 name = "queenbeethreading"
-version = "2.2"
+version = "1.BUGFIX1"
 authors = [
   { name="puzzle00", email="email@example.com" },
 ]

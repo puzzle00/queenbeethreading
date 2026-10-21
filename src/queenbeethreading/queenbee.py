@@ -60,7 +60,7 @@ class WorkerBee:
         self.drone = d
         self.task = d.prop
 
-    def job(self):
+    def _job(self):
         try:
             self.task()
         finally:
