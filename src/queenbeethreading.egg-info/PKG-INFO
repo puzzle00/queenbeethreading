@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: queenbeethreading
-Version: 2.1
+Version: 2.2
 Summary: A package that streamlines Python threading
 Author-email: puzzle00 <email@example.com>
 License-Expression: LGPL-3.0-or-later
@@ -17,70 +17,93 @@ Dynamic: license-file
 
 # QUEENBEE THREADING PLATFORM
 ## 1 README
->### 1.1 What Is Queenbee?
->>**QUEENBEE IS**: 
->>- A threading platform that simplifies threading, written in Python. 
->>- A project by [`puzzle00`](github.com/puzzle00)
->>- Your gateway to streamlined threading in Python!
+> ### 1.1 What Is Queenbee?
+>> **QUEENBEE IS**: 
+>> - A threading platform that simplifies threading, written in Python. 
+>> - A project by [`puzzle00`](github.com/puzzle00)
+>> - Best for dispatching many threads at once.
 
 ## 2 DOCUMENTATION
 > ### 2.1 Overview
 > > #### 2.1.1 Queen Bees
 > > > Queen Bees (**`class QueenBee()`**) handle the creation of Worker Bees and the storing of Drones (templates for workers.) You generally need one Queen Bee per app. To use a Queen Bee, create one (` q=QueenBee()` ) and call `q.makeBee(d.mate())` where `"d"` is a Drone Bee. 
 > > #### 2.1.2 Drone Bees
-> > > Drone Bees (**`class DroneBee(func,**inf)`**) serve as templates to create Worker Bees. Their constructor is passed a callback to a function (func) and metadata, for example a label for the worker bee type it's representing. You usually have several drones per application. 
+> > > Drone Bees (**`class DroneBee(func,**inf)`**) serve as templates to create Worker Bees. Their constructor is passed a callback to a function (func) and metadata, for example a label for the worker bee type it's representing. The function should take **no arguments** and have a return type of **`None`**. You usually have several drones per application. 
 > > ####  2.1.3 Workers 
-> > > Worker Bees ( __`class WorkerBee()`__ ) handle the actual work defined by the [Drone Bees](#db-overview) they are linked to. They can be dispatched by a Queen's `begin()` method or (advanced) Queenless Operation.
+> > > Worker Bees ( __`class WorkerBee()`__ ) handle the actual work defined by the Drone Bees they are linked to. They can be dispatched by a Queen's `begin()` method or (advanced) Queenless Operation.
 > ### 2.2 In Detail
 > > #### 2.2.1 Queen Bees
-> > >  create()
-> > > : Creates Workers. *DO NOT CALL YOURSELF UNLESS USING QUEENLESS OP (ADVANCED)*
+> > > ##### `create()`
 > > > 
-> > > makeBee(DroneBee d)
-> > > : Stores a Drone in the drone repo.
+> > > Creates Workers. *DO NOT CALL YOURSELF UNLESS USING QUEENLESS OP (ADVANCED)*
+> > > 
+> > > ##### `makeBee(DroneBee d)`
+> > > 
+> > > Stores a Drone in the drone repo.
 > > >
-> > >begin(label=None)
-> > > : Starts the Worker Bees.
-> > >If `label` param included: starts all the workers with label `label`.
+> > > ##### `begin(label=None)`
+> > > 
+> > > Starts the Worker Bees.
+> > > 
+> > > If `label` param included: starts all the workers with label `label`.
 > > >
-> > >uptask(label,cap)
-> > > : Tasks `cap` bees with drone (identified by label) `label`
+> > > ##### `uptask(label,cap)`
+> > >
+> > > Tasks `cap` bees with drone (identified by label) `label`.
+> > >
+> > >
+> > > ##### `block_until_done()`
+> > >
+> > > __New in version 2.2__
+> > >
+> > > Blocks until all bees are finished.
 > > #### 2.2.2 Drone Bees
-> > > \_\_init\_\_(func,allmd=None,**inf)
-> > > : Initializes the drone with task `func` and info (including label) `inf`. If you want to pass a dict as metadata, use allmd.
+> > > ##### `__init__(func,allmd=None,**inf)`
 > > > 
-> > > mate()
-> > > : clones the drone!
+> > > Initializes the drone with task `func` and info (including label) `inf`. If you want to pass a dict as metadata, use allmd.
+> > > 
+> > > ##### `mate()`
+> > > 
+> > > clones the drone!
 > > > Returns a copy of the drone.
 > > > 
-> > > process()
-> > > : *Do not call yourself. Auto-called by the class.*
+> > > ##### `process()`
+> > > 
+> > > » *Do not call yourself. Auto-called by the class.*
 > > > Processes the meta-info `inf` dict.
 > > >
-> > > retask(func)
-> > > : Gives the drone a new task to use.
-> > > *__Some info__: This is why you always use mate().*
+> > > ##### `retask(func)`
+> > > 
+> > > Gives the drone a new task to use.
+> > > 
+> > > » *__Some info__: This is why you always use mate().*
 > > #### 2.2.3 Worker Bees
-> > > go()
-> > > : *DO NOT CALL YOURSELF UNLESS USING QUEENLESS OP (ADVANCED)*
-> > > *Do not call yourself. Auto-called by the Queen class.*
+> > > ##### `go()`
+> > > 
+> > > » *DO NOT CALL YOURSELF UNLESS USING QUEENLESS OP (ADVANCED)*
+> > > 
 > > > Starts this Worker.
 > > >
-> > > apply(DroneBee d)
-> > > : *DO NOT CALL YOURSELF UNLESS USING QUEENLESS OP (ADVANCED)*
-> > > *Do not call yourself. Auto-called by the Queen class.*
+> > > ##### `apply(DroneBee d)`
+> > >
+> > > » *DO NOT CALL YOURSELF UNLESS USING QUEENLESS OP (ADVANCED)*
+> > > 
 > > > Set this worker to a certain Drone type.
+> > >
+> > > The `WorkerBee` class has some other methods internally used by the class.
 > > #### 2.2.4 Other Classes
-> > > BeeBuffer
-> > > : BeeBuffer is the class that queues the bees while waiting for a turn to run.
+> > > ##### BeeBuffer
+> > > 
+> > > BeeBuffer is the class that queues the bees while waiting for a turn to run.
 > ### 2.3 Queenless Op (Advanced)
-> *__note__: this is an __advanced topic__. Recommended for experienced people only.*
+> » *__note__: this is an __advanced topic__. Recommended for experienced people only.* «
 > > #### 2.3.1 Overview
 > > > **Queenless Op is a way you can exert finer control over your Worker Bees by controlling the bees without a queen.**
-> > > *__note__: you still need a queen, the queen just isn't controlling your bees.*
+> > > » *__note__: you still need a queen, the queen just isn't controlling your bees.*
 > > #### 2.3.2 In Detail
-> > > Making Bees
-> > > : Instead of letting the queen make worker bees, you create them yourself by using the Queen's `create()` method. This will create a blank bee, that you then *infuse* with a drone using the worker's `apply()` method, like this:
+> > > ##### Making Bees
+> > > 
+> > > Instead of letting the queen make worker bees, you create them yourself by using the Queen's `create()` method. This will create a blank bee, that you then *infuse* with a drone using the worker's `apply()` method, like this:
 ```python
 q=QueenBee()
 def myFunc():
@@ -91,15 +114,16 @@ emptyBee.apply(d)
 emptyBee.go()
 ```
 > > > 
-> > > Go'ing Bees
-> > > : To go (start) a bee, call its `go()` method.
+> > > ##### Go'ing Bees
+> > > 
+> > > To go (start) a bee, call its `go()` method.
 > > > Usually, this method is called by the Queen's `begin()` method, but in QO, it is called by the user.
 > >
 > >
 >  ### 2.4 Examples
 >
 > > #### 2.4.1 Bee Hello 
-> > >A simple example of using queenbee to say hello world. (not something you would usually use qb for)
+> > >A simple example of using Queen Bee Threading to say `"Hello, world"`. (Not something you would usually use queenbee for)
 ```python
 import queenbee as qb
 
@@ -111,7 +135,7 @@ q.makeBee(d.mate())
 q.uptask("HelloMyBeesHello",1)
 q.begin()
 #or: q.begin("HelloMyBeesHello")
-
+q.block_until_done()
 ###############
 #Output:      #
 # Hello World #
@@ -134,13 +158,14 @@ q.makeBee(sb.mate())
 q.uptask('1',1)
 q.uptask('2',1)
 q.begin()
+q.block_until_done()
 ##############
 #Output:     #
 # 12 or 21   #
 ##############
 ```
 > > #### 2.4.3 Three Bees
-> > > you know now!
+> > > The same spirit as the previous example.
 ```py
 import queenbee as qb
 def b1():
@@ -159,6 +184,8 @@ q.uptask('3',1)
 q.makeBee(d1.mate())
 q.makeBee(d2.mate())
 q.makeBee(d3.mate())
+q.begin()
+q.block_until_done()
 ###################################
 #Output:                          #
 # 123, 132, 213, 231, 312, or 321 #

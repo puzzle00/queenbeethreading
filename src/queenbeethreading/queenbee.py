@@ -3,6 +3,7 @@ from .exceptions import BeeException
 import threading
 from copy import deepcopy
 
+
 class BeeBuffer:
     def __init__(self):
         self.buffer = []
@@ -19,8 +20,9 @@ class BeeBuffer:
 
 drone_number = 0
 
-running_workers=[]
-lock=threading.Lock()
+running_workers = []
+lock = threading.Lock()
+
 
 class DroneBee:
     def __init__(self, func, allmd=None, **inf):
@@ -52,12 +54,12 @@ class WorkerBee:
     def __init__(self):
         self.drone = None
         self.task = nulltask
-        self.going=False
-    
+        self.going = False
+
     def apply(self, d: DroneBee):
         self.drone = d
         self.task = d.prop
-    
+
     def job(self):
         try:
             self.task()
@@ -74,6 +76,7 @@ class WorkerBee:
             running_workers.append(self)
 
         threading.Thread(target=self._job).start()
+
 
 class QueenBee:
     @staticmethod
@@ -98,7 +101,7 @@ class QueenBee:
         for i in range(cap):
             f = self.emptybuffer.get()
             f.apply(self.dronerepo[label])
-            self.runnable[label +"/"+ str(i)] = f
+            self.runnable[label + "/" + str(i)] = f
         # Refill the buffer
         for i in range(cap):
             self.emptybuffer.put(self.create())
@@ -109,14 +112,13 @@ class QueenBee:
                 if l.split("/")[0] == label:
                     b.go()
                     self.runnable.pop(l)
-                    
+
         else:
-            for l,b in deepcopy(self.runnable).items():
+            for l, b in deepcopy(self.runnable).items():
                 b.go()
                 self.runnable.pop(l)
-    
+
     @staticmethod
     def block_until_complete():
         while running_workers:
             pass
-
