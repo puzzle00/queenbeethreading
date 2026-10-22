@@ -66,7 +66,7 @@ class WorkerBee:
         finally:
             self.die()
 
-    def die():
+    def die(self):
         with lock:
             if self in running_workers:
                 running_workers.remove(self)
